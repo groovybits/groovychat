@@ -1,0 +1,25 @@
+This will be much improved, and easier to do.
+
+For now you can hopefully figure it out, basically 
+you must change the cfg file to your liking and
+place the cfg & cgi file in your cgi-bin.  
+
+
+The chat.cfg and chat.cgi are the files that go in the cgi-bin.
+the chatroom is accessable via /cgi-bin/chat.cgi.
+
+You must setup the database by using the table.sql script with
+a MySQL client.  The dbcreate perl program can create the table if
+you create a database named CHATROOM ahead of time.  The username
+and password of the user accessing the database is set in the tools.cfg
+script. 
+
+There are the default username and password in the chat.cfg and tools.cfg 
+files.  These should be changed, never use the default ones, since then
+anyone could attack your SQL server from remote if they try them.
+
+The install script asks you where to put the chat program and will set the 
+permissions secure, you must edit the configuratino file still which 
+is chat.cfg.
+
+ 

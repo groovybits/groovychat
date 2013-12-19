@@ -1,0 +1,55 @@
+#!/usr/bin/perl
+
+print "\nGroovy Chatter...\n";
+
+while ($confirm ne "y") {
+  while ($confirm ne "y") {
+    if ($confirm eq "y") {
+      $confirm = '';
+    } else {
+      print "\nWhat is the full path to your CGI Bin? ";
+      $cgi_bin = <STDIN>;
+      chomp($cgi_bin);
+      print "\nIs this Correct? [$cgi_bin] [y|n]: ";
+      $confirm = <STDIN>;
+      chomp($confirm);
+    }
+  }
+  $confirm = '';
+
+  while ($confirm ne "y") {
+    if ($confirm eq "y") {
+      $confirm = '';
+    } else {
+      print "\nWhat is the full path to your Web Root? ";
+      $webdir = <STDIN>;
+      chomp($webdir);
+      print "\nIs this Correct? [$webdir] [y|n]: ";
+      $confirm = <STDIN>;
+      chomp($confirm);
+    }
+  }
+  $confirm = '';
+
+  if ( -e "$webdir" && 
+       -e "$cgi_bin" ) 
+  {
+    $confirm = 'y';
+    `cp -r chatimages $webdir/`;
+    `cp chat.cfg $cgi_bin/`;
+    `cp chat.cgi $cgi_bin/`;
+    chmod 0750, "$cgi_bin/chat.cgi";
+    chmod 0440, "$cgi_bin/chat.cfg";
+    `chown root:nobody $cgi_bin/chat.cgi`;
+    `chown root:nobody $cgi_bin/chat.cfg`;
+  } else {
+    print "\n*** No Such file or Directory! ***\n";
+    print "\n*** Retrying Program from the Start ***\n";
+  }
+}
+
+print "\nFinished installing Groovy-Chatter Chat Room. \n\n";
+print "Now configure the $cgi_bin/chat.cfg file to your customizations.\n";
+print "Also create the Database and table, you need a CHATROOM datbase and \n";
+print "a CHATBASE table which there is a table.sql file with the fields.\n";
+print "\n";
